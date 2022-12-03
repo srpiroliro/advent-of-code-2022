@@ -16,8 +16,7 @@ for p in play_log:
     hs=p.split(" ")
     
     result+=(hands[hs[1]]-1)*3+hands[r[hs[1]][hs[0]]]
-
-
+    
 #######  END  ########
 
 
