@@ -1,5 +1,4 @@
-from tqdm import tqdm
-
+from math import prod
 with open("input.txt") as f: i=f.read()
 
 def p1(x):
@@ -19,7 +18,7 @@ def p1(x):
     
     inspections=[0 for _ in range(len(monkeys))]
     
-    for _ in tqdm(range(20)):
+    for _ in range(20):
         for i,m in enumerate(monkeys):
             l=len(m["items"])
             inspections[i]+=l
@@ -47,22 +46,17 @@ def p2(x):
         })
     
     inspections=[0 for _ in range(len(monkeys))]
+    d=prod(m["divisible"] for m in monkeys)
     
-    for _ in tqdm(range(1000)):
+    for _ in (range(10000)):
         for i,m in enumerate(monkeys):
             l=len(m["items"])
             inspections[i]+=l
             for _ in range(l):
-                num=monkeys[i]["items"].pop(0)
-                oper=m["op"].replace("old", str(num))
-                w=0
-                
-                # TO DO
-                    
+                num=monkeys[i]["items"].pop(0)%d
+                w=eval(m["op"], {}, {"old":num})
+
                 monkeys[m["t"] if w%m["divisible"]==0 else m["f"]]["items"].append(w)
-    print(inspections)
 
     inspections.sort(reverse=True)
-    return(inspections[0]*inspections[1])
-
-print(p2(i))
+    return inspections[0]*inspections[1]
