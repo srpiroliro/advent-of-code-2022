@@ -1,6 +1,5 @@
 import json
 from functools import cmp_to_key
-from pprint import pprint
 
 with open("input.txt") as f: i=f.read()
 
@@ -10,7 +9,6 @@ def p1(x):
         left,right=[json.loads(x) for x in group.splitlines()]
         if compare(left,right)>0:correct+=pair
     return correct
-
 
 def p2(x):
     groups=[json.loads(i) for i in x.replace("\n\n","\n").splitlines()]
@@ -31,4 +29,3 @@ def compare(x,y):
             elif i>=len(x) and i<len(y): return 1
             else: return -1
         return 0
-print(p2(i))
